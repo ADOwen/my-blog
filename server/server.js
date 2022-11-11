@@ -1,16 +1,24 @@
 const express = require('express');
 
+const app = express()
 const PORT = process.env.PORT || 3001;
 
-const app = express()
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+
+const db = require('./config/connection');
 
 app.get('/', (req, res) => {
   res.send('<h1> Welcome to my Page </h1>')
 })
 
-app.listen(PORT, () =>{
-  console.log(`API server running on port ${PORT}!`);
+
+db.once('open', () =>{
+  app.listen(PORT, () =>{
+    console.log(`API server running on port ${PORT}!`);
+  })
 })
+
+
+
