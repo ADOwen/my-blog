@@ -1,7 +1,7 @@
 const {Schema, model} = require('mongoose');
 const dateFormat = require('../utils/dateFormat')
 
-const Post = new Schema(
+const postSchema = new Schema(
   {
     title: {
       type: String,
@@ -25,5 +25,7 @@ const Post = new Schema(
     }
   }
 )
+
+const Post = model('Post', postSchema);
 
 module.exports = Post;
